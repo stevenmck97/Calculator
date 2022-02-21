@@ -27,9 +27,10 @@ function operate(x, y) {
 }
 
 function display() {
-    numberBtns.forEach((num) => {
-        num.addEventListener("click", () => {
-            labelDisplay.innerHTML = num.value;
+    numberBtns.forEach((val) => {
+        val.addEventListener("click", () => {
+            num = val.value;
+            labelDisplay.innerHTML += num;
         });
     });
 }
