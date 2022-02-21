@@ -47,6 +47,7 @@ function display() {
         val.addEventListener("click", () => {
             num = val.value;
             labelDisplay.innerHTML += num;
+            console.log(num);
         });
     });
 }
@@ -59,6 +60,6 @@ function clear() {
 
 (function runCalculator() {
     display();
-    operator();
+    getCurrentOperator();
     clear();
 })();
