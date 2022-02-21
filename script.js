@@ -1,10 +1,16 @@
 const numberBtns = document.querySelectorAll("[data-number]");
-const operatorBtns = document.querySelectorAll("[data-operations]");
+const operatorBtns = document.querySelectorAll("[data-operator]");
 const labelDisplay = document.querySelector("#display");
+const clearBtn = document.querySelector("#clear");
+const deleteBtn = document.querySelector("#delete");
+const equalsBtn = document.querySelector("#compute");
+
+let num = "";
+let op = "";
 
 function operate(x, y) {
     let compute;
-    switch (operation) {
+    switch (op) {
         case "+":
             compute = x + y;
             break;
@@ -26,6 +32,16 @@ function operate(x, y) {
     }
 }
 
+function getCurrentOperator() {
+    operatorBtns.forEach((val) => {
+        val.addEventListener("click", () => {
+            op = val.value;
+            labelDisplay.innerHTML += op;
+            console.log(op);
+        });
+    });
+}
+
 function display() {
     numberBtns.forEach((val) => {
         val.addEventListener("click", () => {
@@ -35,6 +51,14 @@ function display() {
     });
 }
 
+function clear() {
+    clearBtn.addEventListener("click", () => {
+        labelDisplay.innerHTML = "";
+    });
+}
+
 (function runCalculator() {
     display();
+    operator();
+    clear();
 })();
