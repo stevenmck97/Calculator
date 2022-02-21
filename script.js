@@ -1,23 +1,23 @@
 function operate(x, y) {
     let compute;
     switch (operation) {
-        case '+':
+        case "+":
             compute = x + y;
             break;
 
-        case '-':
+        case "-":
             compute = x - y;
             break;
 
-        case '*':
+        case "*":
             compute = x * y;
             break;
 
-        case '/':
+        case "/":
             compute = x / y;
             break;
-        
+
         default:
-            return
+            return;
     }
 }
