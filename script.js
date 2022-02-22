@@ -1,34 +1,48 @@
 const numberBtns = document.querySelectorAll("[data-number]");
 const operatorBtns = document.querySelectorAll("[data-operator]");
 const labelDisplay = document.querySelector("#display");
+const displayEquation = document.querySelector("#displayEquation");
 const clearBtn = document.querySelector("#clear");
 const deleteBtn = document.querySelector("#delete");
-const equalsBtn = document.querySelector("#compute");
+const equalsBtn = document.querySelector("#equals");
 
 let num = "";
 let op = "";
+let firstOperand = "";
+let secondOperand = "";
 
-function operate(x, y) {
-    let compute;
-    switch (op) {
+function add(x, y) {
+    return x + y;
+}
+
+function subtract(x, y) {
+    return x - y;
+}
+
+function divide(x, y) {
+    return x / y;
+}
+
+function multiply(x, y) {
+    return x * y;
+}
+
+function compute(operator, x, y) {
+    switch (operator) {
         case "+":
-            compute = x + y;
-            break;
+            return add(x, y);
 
         case "-":
-            compute = x - y;
-            break;
+            return subtract(x, y);
 
         case "*":
-            compute = x * y;
-            break;
+            return multiply(x, y);
 
         case "/":
-            compute = x / y;
-            break;
+            return divide(x, y);
 
         default:
-            return;
+            return null;
     }
 }
 
@@ -36,30 +50,41 @@ function getCurrentOperator() {
     operatorBtns.forEach((val) => {
         val.addEventListener("click", () => {
             op = val.value;
-            labelDisplay.innerHTML += op;
-            console.log(op);
+            displayEquation.innerHTML += op;
         });
     });
 }
 
-function display() {
+function equationSplit() {
+    equalsBtn.addEventListener("click", () => {
+        equation = displayEquation.innerHTML;
+        splitEquation = equation.split(op);
+        firstOperand = parseInt(splitEquation[0]);
+        secondOperand = parseInt(splitEquation[1]);
+        answer = compute(op, firstOperand, secondOperand);
+        labelDisplay.innerHTML = answer;
+    });
+}
+
+function displayHandler() {
     numberBtns.forEach((val) => {
         val.addEventListener("click", () => {
             num = val.value;
-            labelDisplay.innerHTML += num;
-            console.log(num);
+            displayEquation.innerHTML += num;
         });
     });
 }
 
 function clear() {
     clearBtn.addEventListener("click", () => {
+        displayEquation.innerHTML = "";
         labelDisplay.innerHTML = "";
     });
 }
 
 (function runCalculator() {
-    display();
+    displayHandler();
     getCurrentOperator();
+    equationSplit();
     clear();
 })();
