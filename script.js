@@ -59,10 +59,14 @@ function equationSplit() {
     equalsBtn.addEventListener("click", () => {
         equation = displayEquation.innerHTML;
         splitEquation = equation.split(op);
-        firstOperand = parseInt(splitEquation[0]);
-        secondOperand = parseInt(splitEquation[1]);
-        answer = compute(op, firstOperand, secondOperand);
-        labelDisplay.innerHTML = `= ${answer}`;
+
+        for (let i = 0; i <= splitEquation.length; i++) {
+            firstOperand = parseInt(splitEquation[0]);
+            secondOperand = parseInt(splitEquation[1]);
+            answer = compute(op, firstOperand, secondOperand);
+            displayEquation.innerHTML = answer;
+            firstOperand = answer;
+        }
     });
 }
 
@@ -88,3 +92,18 @@ function clear() {
     equationSplit();
     clear();
 })();
+
+// function equationSplit() {
+//     equalsBtn.addEventListener("click", () => {
+//         equation = displayEquation.innerHTML;
+//         splitEquation = equation.split(op);
+
+//         for (let i = 0; i <= splitEquation.length; i++) {
+//             firstOperand = parseInt(splitEquation[0]);
+//             secondOperand = parseInt(splitEquation[1]);
+//             answer = compute(op, firstOperand, secondOperand);
+//             displayEquation.innerHTML = answer;
+//             firstOperand = answer;
+//         }
+//     });
+// }
