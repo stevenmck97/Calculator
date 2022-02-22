@@ -28,6 +28,8 @@ function multiply(x, y) {
 }
 
 function compute(operator, x, y) {
+    x = Number(x);
+    y = Number(y);
     switch (operator) {
         case "+":
             return add(x, y);
@@ -59,12 +61,13 @@ function equationSplit() {
     equalsBtn.addEventListener("click", () => {
         equation = displayEquation.innerHTML;
         splitEquation = equation.split(op);
-
         for (let i = 0; i <= splitEquation.length; i++) {
-            firstOperand = parseInt(splitEquation[0]);
-            secondOperand = parseInt(splitEquation[1]);
-            answer = compute(op, firstOperand, secondOperand);
+            answer = splitEquation.reduce((previousValue, currentValue) =>
+                compute(op, previousValue, currentValue)
+            );
+            // answer = compute(op, firstOperand, secondOperand);
             displayEquation.innerHTML = answer;
+            console.log(answer);
             firstOperand = answer;
         }
     });
@@ -74,7 +77,7 @@ function displayHandler() {
     numberBtns.forEach((val) => {
         val.addEventListener("click", () => {
             num = val.value;
-            displayEquation.innerHTML += num;
+            displayEquation.innerHTML += ` ${num} `;
         });
     });
 }
