@@ -57,7 +57,7 @@ function setCurrentOperator() {
     });
 }
 
-function equationSplit() {
+function evaluate() {
     equalsBtn.addEventListener("click", () => {
         equation = displayEquation.innerHTML;
         splitEquation = equation.split(op);
@@ -92,7 +92,7 @@ function clear() {
 (function runCalculator() {
     displayHandler();
     setCurrentOperator();
-    equationSplit();
+    evaluate();
     clear();
 })();
 
