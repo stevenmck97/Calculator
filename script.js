@@ -46,7 +46,7 @@ function compute(operator, x, y) {
     }
 }
 
-function getCurrentOperator() {
+function setCurrentOperator() {
     operatorBtns.forEach((val) => {
         val.addEventListener("click", () => {
             op = val.value;
@@ -62,7 +62,7 @@ function equationSplit() {
         firstOperand = parseInt(splitEquation[0]);
         secondOperand = parseInt(splitEquation[1]);
         answer = compute(op, firstOperand, secondOperand);
-        labelDisplay.innerHTML = answer;
+        labelDisplay.innerHTML = `= ${answer}`;
     });
 }
 
@@ -84,7 +84,7 @@ function clear() {
 
 (function runCalculator() {
     displayHandler();
-    getCurrentOperator();
+    setCurrentOperator();
     equationSplit();
     clear();
 })();
