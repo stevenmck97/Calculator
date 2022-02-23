@@ -6,10 +6,13 @@ const clearBtn = document.querySelector("#clear");
 const deleteBtn = document.querySelector("#delete");
 const equalsBtn = document.querySelector("#equals");
 
+equalsBtn.addEventListener("click", evaluate);
+deleteBtn.addEventListener("click", deleteNum);
+
 let num = "";
 let op = "";
 let firstOperand = "";
-let secondOperand = "";
+let secondOperand;
 
 function add(x, y) {
     return x + y;
@@ -48,6 +51,17 @@ function compute(operator, x, y) {
     }
 }
 
+// function decimalHandler() {}
+
+function displayHandler() {
+    numberBtns.forEach((val) => {
+        val.addEventListener("click", () => {
+            num = val.value;
+            displayEquation.innerHTML += num;
+        });
+    });
+}
+
 function setCurrentOperator() {
     operatorBtns.forEach((val) => {
         val.addEventListener("click", () => {
@@ -58,28 +72,17 @@ function setCurrentOperator() {
 }
 
 function evaluate() {
-    equalsBtn.addEventListener("click", () => {
-        equation = displayEquation.innerHTML;
-        splitEquation = equation.split(op);
-        for (let i = 0; i <= splitEquation.length; i++) {
-            answer = splitEquation.reduce((previousValue, currentValue) =>
-                compute(op, previousValue, currentValue)
-            );
-            // answer = compute(op, firstOperand, secondOperand);
-            displayEquation.innerHTML = answer;
-            console.log(answer);
-            firstOperand = answer;
-        }
-    });
-}
-
-function displayHandler() {
-    numberBtns.forEach((val) => {
-        val.addEventListener("click", () => {
-            num = val.value;
-            displayEquation.innerHTML += ` ${num} `;
-        });
-    });
+    equation = displayEquation.innerHTML;
+    splitEquation = equation.split(op);
+    for (let i = 0; i <= splitEquation.length; i++) {
+        answer = splitEquation.reduce((previousValue, currentValue) =>
+            compute(op, previousValue, currentValue)
+        );
+        // answer = compute(op, firstOperand, secondOperand);
+        displayEquation.innerHTML = answer;
+        console.log(answer);
+        firstOperand = answer;
+    }
 }
 
 function clear() {
@@ -89,24 +92,29 @@ function clear() {
     });
 }
 
+function deleteNum() {
+    displayEquation.innerHTML = displayEquation.innerHTML
+        .toString()
+        .slice(0, -1);
+}
+
 (function runCalculator() {
     displayHandler();
     setCurrentOperator();
-    evaluate();
     clear();
 })();
 
 // function equationSplit() {
-//     equalsBtn.addEventListener("click", () => {
-//         equation = displayEquation.innerHTML;
-//         splitEquation = equation.split(op);
+//     equation = displayEquation.innerHTML;
+//     splitEquation = equation.split(op);
 
-//         for (let i = 0; i <= splitEquation.length; i++) {
+//     for (let i = 0; i <= splitEquation.length; i++) {
+//         if (splitEquation.length === 1) {
 //             firstOperand = parseInt(splitEquation[0]);
 //             secondOperand = parseInt(splitEquation[1]);
 //             answer = compute(op, firstOperand, secondOperand);
 //             displayEquation.innerHTML = answer;
 //             firstOperand = answer;
 //         }
-//     });
+//     }
 // }
