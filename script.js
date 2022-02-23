@@ -6,13 +6,13 @@ const clearBtn = document.querySelector("#clear");
 const deleteBtn = document.querySelector("#delete");
 const equalsBtn = document.querySelector("#equals");
 
-equalsBtn.addEventListener("click", evaluate);
-deleteBtn.addEventListener("click", deleteNum);
-
 let num = "";
 let op = "";
 let firstOperand = "";
 let secondOperand;
+
+deleteBtn.addEventListener("click", deleteNum);
+equalsBtn.addEventListener("click", evaluate);
 
 function add(x, y) {
     return x + y;
@@ -51,8 +51,6 @@ function compute(operator, x, y) {
     }
 }
 
-// function decimalHandler() {}
-
 function displayHandler() {
     numberBtns.forEach((val) => {
         val.addEventListener("click", () => {
@@ -73,16 +71,10 @@ function setCurrentOperator() {
 
 function evaluate() {
     equation = displayEquation.innerHTML;
-    splitEquation = equation.split(op);
-    for (let i = 0; i <= splitEquation.length; i++) {
-        answer = splitEquation.reduce((previousValue, currentValue) =>
-            compute(op, previousValue, currentValue)
-        );
-        // answer = compute(op, firstOperand, secondOperand);
-        displayEquation.innerHTML = answer;
-        console.log(answer);
-        firstOperand = answer;
-    }
+    answer = Function(`"use strict";return (${equation})`)();
+    displayEquation.innerHTML = answer;
+    console.log(answer);
+    firstOperand = answer;
 }
 
 function clear() {
@@ -116,5 +108,19 @@ function deleteNum() {
 //             displayEquation.innerHTML = answer;
 //             firstOperand = answer;
 //         }
+//     }
+// }
+
+// function evaluate() {
+//     equation = displayEquation.innerHTML;
+//     splitEquation = equation.split(op);
+//     for (let i = 0; i <= splitEquation.length; i++) {
+//         answer = splitEquation.reduce((previousValue, currentValue) =>
+//             compute(op, previousValue, currentValue)
+//         );
+//         // answer = compute(op, firstOperand, secondOperand);
+//         displayEquation.innerHTML = answer;
+//         console.log(answer);
+//         firstOperand = answer;
 //     }
 // }
